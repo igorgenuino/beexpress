@@ -1,0 +1,20 @@
+﻿<h2 class="title text-center">New User Signup!</h2>
+		<div class="container">
+			<div class="row">
+				
+				<div class="col-sm-4">
+					<div class="signup-form">
+                        <template [ngIf]="result != null && result.count == 1">
+                            Username already exists
+                        </template>
+						<form [formGroup]="signUpForm" (ngSubmit)="save($event)">
+							<input formControlName="username" placeholder="Username" type="text" required="required">
+                            <input formControlName="password" placeholder="Password" type="password" required="required">
+							<input formControlName="fullName" placeholder="Full Name" type="text" required="required">
+							<input formControlName="email" placeholder="Email Address" type="text" required="required">
+							<button type="submit">Signup</button>
+						</form>
+					</div><!--/sign up form-->
+				</div>
+			</div>
+		</div>

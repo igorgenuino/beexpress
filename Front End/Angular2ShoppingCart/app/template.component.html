@@ -1,0 +1,155 @@
+
+	<header id="header"><!--header-->
+		<!--/header_top-->
+		
+		<div class="header-middle"><!--header-middle-->
+			<div class="container">
+				<div class="row">
+					<div class="col-sm-4">
+						<div class="logo pull-left">
+							<a [routerLink]="['/home']"><img src="{{logo}}" alt="" width="60"></a>
+						</div>
+						
+					</div>
+					<div class="col-sm-8">
+						<div class="shop-menu pull-right">
+							<ul class="nav navbar-nav">
+								<li><a [routerLink]="['/cart']"><i class="fa fa-shopping-cart"></i> Cart ({{cartInfo.total}}) - {{cartInfo.total_items | currency:'USD':true:'1.2-2'}}</a></li>
+                                <template [ngIf]="userInfo.username.length == 0">
+                                    <li><a [routerLink]="['/login']"><i class="fa fa-lock"></i> Login</a></li>
+                                    <li><a [routerLink]="['/sign-up']"><i class="fa fa-crosshairs"></i> Sign Up</a></li>
+                                </template>
+                                <template [ngIf]="userInfo.username.length != 0">
+                                    <li class="dropdown">
+                                        <a href="#">Welcome {{userInfo.username}}<i class="fa fa-angle-down"></i></a>
+                                    <ul role="menu" class="sub-menu">
+                                        <li><a [routerLink]="['/orders']">Orders</a></li>
+										<li><a [routerLink]="['/profile']">Change Profile</a></li>
+                                        <li><a href="#" (click)="logout()">Logout</a></li>
+                                    </ul>
+                                </li>
+                                </template>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div><!--/header-middle-->
+	
+		<div class="header-bottom"><!--header-bottom-->
+			<div class="container">
+				<div class="row">
+					<div class="col-sm-9">
+						<div class="navbar-header">
+							<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+								<span class="sr-only">Toggle navigation</span>
+								<span class="icon-bar"></span>
+								<span class="icon-bar"></span>
+								<span class="icon-bar"></span>
+							</button>
+						</div>
+						<div class="mainmenu pull-left">
+							<ul class="nav navbar-nav collapse navbar-collapse">
+								<li><a [routerLink]="['/home']">Latest Products</a></li>
+								<li><a [routerLink]="['/most-viewed']">Most Viewd</a></li>				
+								<li><a [routerLink]="['/best-seller']">Best Sales</a></li>
+							</ul>
+						</div>
+					</div>
+					<div class="col-sm-3">
+						<div class="search_box pull-right">
+							<form action="#" class="searchform">
+								<input placeholder="Search" type="text" name="keyword" [(ngModel)]="keyword">
+								<button type="button" class="btn btn-default" (click)="search()"><i class="fa fa-arrow-circle-o-right"></i></button>
+							</form>
+							
+						</div>
+					</div>
+				</div>
+			</div>
+		</div><!--/header-bottom-->
+	</header><!--/header-->
+	
+	<!--/slider-->
+	
+	<section>
+		<div class="container">
+			<div class="row">
+				<div class="col-sm-3">
+					<div class="left-sidebar">
+						<h2>Category</h2>
+						
+						<div class="panel-group category-products" id="accordian"><!--category-productsr-->
+							<template [ngIf]="categories && categories.length">
+								
+								<div class="panel panel-default" *ngFor="let category of categories">
+									<div class="panel-heading">
+									<template [ngIf]="category.child > 0">
+										<h4 class="panel-title">
+											<a data-toggle="collapse" data-parent="#accordian" href="#{{category.id}}" class="collapsed">
+												<span class="badge pull-right"><i class="fa fa-plus"></i></span>
+												{{category.name}}
+											</a>
+										</h4>
+									</template>
+									<template [ngIf]="category.child == 0">
+										<h4 class="panel-title"><a [routerLink]="['/category', { id:category.id }]">{{category.name}}</a></h4>
+									</template>
+								</div>
+								<div id="{{category.id}}" class="panel-collapse collapse">
+									<div class="panel-body">
+										<ul>
+											<li *ngFor="let subcat of category.subcategories"><a [routerLink]="['/category', { id:subcat['id'] }]">{{subcat['name']}}</a></li>
+										</ul>
+									</div>
+								</div>
+								</div>
+							
+							</template>
+							
+							
+						</div>
+					
+						<div class="brands_products"><!--brands_products-->
+							<h2>Brands</h2>
+							<div class="brands-name">
+								<ul class="nav nav-pills nav-stacked" *ngIf="brands && brands.length > 0">
+									<li *ngFor="let brand of brands"><a [routerLink]="['/brand', { id:brand.id }]"> {{brand.name}}</a></li>
+								</ul>
+							</div>
+						</div><!--/brands_products-->
+						
+						
+						
+						<div class="shipping text-center"><!--shipping-->
+							<img src="app/assets/images/home/shipping.jpg" alt="">
+						</div><!--/shipping-->
+					
+					</div>
+				</div>
+				
+				<div class="col-sm-9 padding-right">
+					<router-outlet></router-outlet>
+				</div>
+			</div>
+		</div>
+	</section>
+	
+	<footer id="footer"><!--Footer-->
+		
+		
+		
+		
+		<div class="footer-bottom">
+			<div class="container">
+				<div class="row">
+					<p class="pull-left">Copyright &copy; 2017 OctopusCodes. All rights reserved.</p>
+					
+				</div>
+			</div>
+		</div>
+		
+	</footer><!--/Footer-->
+
+
+<a id="scrollUp" href="#top" style="position: fixed; z-index: 2147483647; display: none;"><i class="fa fa-angle-up"></i></a>

@@ -1,0 +1,75 @@
+﻿<h2 class="title text-center">Cart Info</h2>
+<section id="cart_items">
+<div class="table-responsive cart_info">
+				<form ngNoForm method="post" action="https://www.sandbox.paypal.com/cgi-bin/webscr">
+				<table class="table table-condensed">
+					<thead>
+						<tr class="cart_menu">
+							<td class="description">Option</td>
+							<td class="description">Id</td>
+							<td class="description">Name</td>
+							<td class="image">Photo</td>
+							<td class="price">Price</td>
+							<td class="quantity">Quantity</td>
+							<td class="total">Total</td>
+							<td></td>
+						</tr>
+					</thead>
+					<tbody>						
+						<template [ngIf]="items && items.length">
+							<tr *ngFor="let item of items; let i = index" [attr.data-index]="i">		
+								<td class="cart_delete">
+									<a class="cart_quantity_delete" (click)="remove(item.id)"><i class="fa fa-times"></i></a>
+									<input type="hidden" name="item_name_{{i + 1}}" value="{{item.name}}" />
+									<input type="hidden" name="item_number_{{i + 1}}" value="{{item.id}}" />
+									<input type="hidden" name="amount_{{i + 1}}" value="{{item.price}}" />
+									<input type="hidden" name="quantity_{{i + 1}}" value="{{item.quantity}}" />
+								</td>
+								<td class="cart_price">
+									<h4>{{item.id}}</h4>
+								</td>
+								<td class="cart_price">
+									<h4>{{item.name}}</h4>
+								</td>
+								<td class="cart_product">
+									<a [routerLink]="['/product-detail', { id:item.id,catid:item.categoryId }]"><img src="{{item.photo}}" style="width:110px;" alt=""></a>
+								</td>
+								<td class="cart_price">
+									<p>{{item.price | currency:'USD':true:'1.2-2'}}</p>
+								</td>
+								<td class="cart_price">
+									<p>{{item.quantity}}</p>
+								</td>
+								<td class="cart_price">
+									<p>{{item.price * item.quantity | currency:'USD':true:'1.2-2'}}</p>
+								</td>								
+							</tr>
+							<tr>
+								<td class="cart_price" colspan="6" align="center">
+									<h4>Total</h4>
+								</td>
+								<td class="cart_price">
+									<h4>{{s | currency:'USD':true:'1.2-2'}}</h4>
+								</td>
+							</tr>
+							<tr>
+								<td class="cart_price" colspan="7" align="right">
+									<input type="hidden" name="cmd" value="_cart" />
+									<input type="hidden" name="business" value="{{businessEmail}}" />
+									<input type="hidden" name="upload" value="1"/>
+									<input type="hidden" name="return" value="{{returnUrl}}" />
+									<template [ngIf]="userInfo.username.length != 0">
+                                        <input type="image" src="app/assets/images/btn_xpressCheckout.gif" style="margin-top:10px;"/>
+                                    </template>
+                                    <template [ngIf]="userInfo.username.length == 0">
+                                        <a [routerLink]="['/login']" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Please Login to Checkout PayPal</a>
+                                    </template>
+								</td>
+							</tr>
+						</template>
+						
+					</tbody>
+				</table>
+				</form>
+			</div>
+</section>

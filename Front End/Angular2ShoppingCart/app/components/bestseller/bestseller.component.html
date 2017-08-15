@@ -1,0 +1,24 @@
+﻿
+					<div class="features_items"><!--features_items-->
+						<h2 class="title text-center">Best Seller</h2>
+						
+						<div class="col-sm-4" *ngFor="let product of products">
+								<div class="product-image-wrapper">
+									<div class="single-products">
+											<div class="productinfo text-center">
+												<a [routerLink]="['/product-detail', { id:product.id,catid:product.categoryId }]">
+													<img src="{{product.photo}}" alt="">
+												</a>
+												<h2>{{product.price | currency:'USD':true:'1.2-2'}}</h2>
+												<p>{{product.title}}</p>
+												<a [routerLink]="['/cart', { id:product?.id }]" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
+											</div>
+											
+									</div>
+									
+								</div>
+							</div>
+						
+					</div><!--features_items-->
+					
+				

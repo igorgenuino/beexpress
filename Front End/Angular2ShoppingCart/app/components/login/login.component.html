@@ -1,0 +1,21 @@
+﻿<h2 class="title text-center">Login to your account</h2>
+		<div class="container">
+			
+			<div class="row">
+				<div class="col-sm-4">
+					<div class="login-form">
+                        <template [ngIf]="result != null && result.count == 0">
+                            Invalid Username or Password
+                        </template>
+						<form [formGroup]="loginForm" (ngSubmit)="login($event)">
+							<input formControlName="username" placeholder="Username" type="text" required="required">
+							<input formControlName="password" placeholder="Password" type="password" required="required">
+							
+							<button [disabled]="!loginForm.valid" type="submit">Login</button>
+						</form>
+					</div><!--/login form-->
+				</div>
+				
+				
+			</div>
+		</div>

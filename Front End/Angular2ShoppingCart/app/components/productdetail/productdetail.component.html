@@ -1,0 +1,53 @@
+﻿
+					<div class="product-details"><!--product-details-->
+						<div class="col-sm-5">
+							<div class="view-product">
+								<img src="{{product?.photo}}" alt="">
+							</div>
+							
+						</div>
+						<div class="col-sm-7">
+							<div class="product-information"><!--/product-information-->
+								
+								<h2>{{product?.title}}</h2>
+								
+								<span>
+									<span>US {{product?.price | currency:'USD':true:'1.2-2'}}</span>
+																		
+									<a [routerLink]="['/cart', { id:product?.id }]" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
+								</span>
+								
+								<div innerHTML="{{product?.detail}}"></div>
+								
+								
+							</div><!--/product-information-->
+						</div>
+					</div><!--/product-details-->
+					
+					<!--/category-tab-->
+					
+					<div class="features_items">
+						<h2 class="title text-center">recommended items</h2>
+							
+							<!--template bindings={}-->
+							<div class="col-sm-4" *ngFor="let product of products">
+								<div class="product-image-wrapper">
+									<div class="single-products">
+											<div class="productinfo text-center">
+												<a [routerLink]="['/product-detail', { id:product.id,catid:product.categoryId }]">
+													<img src="{{product.photo}}" alt="">
+												</a>
+												<h2>{{product.price | currency:'USD':true:'1.2-2'}}</h2>
+												<p>{{product.title}}</p>
+												<a [routerLink]="['/cart', { id:product?.id }]" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
+											</div>
+											
+									</div>
+									
+								</div>
+							</div>
+							
+							
+						
+						
+					</div>

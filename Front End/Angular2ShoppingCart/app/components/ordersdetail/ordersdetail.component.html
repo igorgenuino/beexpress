@@ -1,0 +1,54 @@
+﻿<div class="features_items"><!--features_items-->
+    <h2 class="title text-center">Orders Detail</h2>
+  <div id="cart_items">
+    <div class="table-responsive cart_info">
+      <table class="table table-condensed">
+        <thead>
+          <tr class="cart_menu">
+            <td class="image">Id</td>
+            <td class="description">Name</td>
+            <td class="price">Photo</td>
+            <td class="quantity">Price</td>
+            <td class="quantity">Quantity</td>
+            <td class="total">Sub Total</td>
+            <td></td>
+          </tr>
+        </thead>
+        <tbody>
+            <template [ngIf]="orderDetails != null">
+                <tr *ngFor="let orderDetail of orderDetails">
+                    <td class="image">{{orderDetail.id}}</td>
+                    <td class="description">{{orderDetail.name}}</td>
+                    <td class="cart_product">
+                        <img src="{{orderDetail.photo}}" style="width:110px;">
+                    </td>
+                    <td class="cart_price">
+                        {{orderDetail.price | currency:'USD':true:'1.2-2'}}
+                    </td>
+                    <td class="cart_quantity">
+                        {{orderDetail.quantity}}
+                    </td>
+                    <td class="cart_quantity">
+                        {{orderDetail.price * orderDetail.quantity | currency:'USD':true:'1.2-2'}}
+                    </td>
+                    
+                </tr> 
+                <tr>
+                    <td colspan="5" align="center" class="cart_description"><h4>Total</h4></td>
+                    <td>
+                        <template [ngIf]="sum != null">
+                            <h4>{{sum.s | currency:'USD':true:'1.2-2'}}</h4>
+                        </template>
+                    </td>
+                    
+                </tr>    
+            </template>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+</div><!--features_items-->
+					
+					
+				

@@ -1,0 +1,38 @@
+﻿<div class="features_items"><!--features_items-->
+    <h2 class="title text-center">Orders List</h2>
+    <div id="cart_items">
+                            <div class="table-responsive cart_info">
+                                <table class="table table-condensed">
+                                    <thead>
+                                        <tr class="cart_menu">
+                                            <td class="image">Id</td>
+                                            <td class="description">Name</td>
+                                            <td class="description">Created</td>
+                                            <td class="quantity">Status</td>
+                                            <td class="total">Option</td>
+                                            <td>
+                                            </td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <template [ngIf]="orders != null">
+                                            <tr *ngFor="let order of orders">
+                                                <td class="image">{{order.id}}</td>
+                                                <td class="description">{{order.name}}</td>
+                                                <td class="description">{{order.creation}}</td>
+                                                <td class="quantity">{{order.status}}</td>
+                                                <td class="total">
+                                                    <a [routerLink]="['/order-detail', { id:order.id }]" class="btn btn-default add-to-cart">Detail</a></td>
+                                                <td>
+                                                </td>
+                                            </tr>                                            
+                                        </template>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+						
+					</div><!--features_items-->
+					
+					
+				
